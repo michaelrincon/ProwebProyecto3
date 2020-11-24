@@ -3,6 +3,7 @@
     $con = mysqli_connect(HOST_DB,USUARIO_DB,USUARIO_PASS,NOMBRE_DB);
     $usuario = $_POST['username'];
     $contra = $_POST['password'];
+    $tipo = $_POST['tipo'];
     $contrasena = password_hash($contra,PASSWORD_DEFAULT);
     $sql= "SELECT * from Clientes where Usuario = '$usuario'";
     $query = mysqli_query($con,$sql);
@@ -11,14 +12,27 @@
         echo "El usuario ya existe";
     }
     else{
-            $sql3 = "INSERT INTO Clientes (Usuario,Contrasena,Rol)
-            VALUES ('$usuario','$contrasena','Usuario')";
-            $registrar_usuario = mysqli_query($con,$sql3);
-            if(!$registrar_usuario){
-                die('No es posible registrar el usuario'.mysqli_error($con));
-            }else{
-                header('Location: ../index.php');
+            if($tipo === 'Cliente'){
+                $sql3 = "INSERT INTO Clientes (Usuario,Contrasena,Rol)
+                VALUES ('$usuario','$contrasena','Cliente')";
+                $registrar_usuario = mysqli_query($con,$sql3);
+                if(!$registrar_usuario){
+                    die('No es posible registrar el usuario'.mysqli_error($con));
+                }else{
+                    header('Location: ../index.php');
+                }
             }
+            if($tipo === 'Administrador'){
+                $sql3 = "INSERT INTO Clientes (Usuario,Contrasena,Rol)
+                VALUES ('$usuario','$contrasena','Administrador')";
+                $registrar_usuario = mysqli_query($con,$sql3);
+                if(!$registrar_usuario){
+                    die('No es posible registrar el usuario'.mysqli_error($con));
+                }else{
+                    header('Location: ../index.php');
+                }
+            }
+            
         }
 
 ?>

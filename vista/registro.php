@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./css/signup.css">
     <title>Registro</title>
   </head>
-  <body>
+  <body> 
     <div class="container text-center">
       <form name="signupForm" onsubmit="return validateForm()" class="form-signin" method="post" action="../controlador/registro.php">
         <img class="mb-4" src="./assets/logo2.png" alt="" width="130">
@@ -18,6 +18,11 @@
         <input name="username" type="text" class="form-control" placeholder="Usuario" required>
         <label for="inputPassword" class="sr-only">Contraseña</label>
         <input name="password" type="password" class="form-control middle-input" placeholder="Contraseña"  required>
+        <p>Seleccione el tipo de usuario:</p>
+        <input type="radio" id="cliente" name="tipo" value="Cliente">
+        <label for="Ascen">Cliente</label><br>
+        <input type="radio" id="admin" name="tipo" value="Administrador">
+        <label for="Desc">Administrador</label>
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarme</button>
       </form>

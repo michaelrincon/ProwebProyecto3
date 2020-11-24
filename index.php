@@ -20,19 +20,19 @@ $sql = "CREATE TABLE Clientes (Id INT(11) NOT NULL AUTO_INCREMENT,Usuario VARCHA
 if (mysqli_query($con, $sql)) {
     echo "Tabla Clientes creada\n";
 } else {
-    echo "Error" . mysqli_error($con)."\n";
+    //echo "Error" . mysqli_error($con)."\n";
 }
 $sql = "CREATE TABLE Invitados ( Email VARCHAR(30) NOT NULL,Cedula INT(10) NOT NULL, PRIMARY KEY (Email));";
 if (mysqli_query($con, $sql)) {
     echo "Tabla Invitados creada\n";
 } else {
-    echo "Error" . mysqli_error($con)."\n";
+    //echo "Error" . mysqli_error($con)."\n";
 }
 $sql = "CREATE TABLE CuentasAhorros (Id INT(11) NOT NULL AUTO_INCREMENT,Saldo decimal(40,10) NOT NULL, ClienteId INT(11),PRIMARY KEY (Id),FOREIGN KEY (ClienteId) REFERENCES Clientes(Id) ON DELETE CASCADE);";
 if (mysqli_query($con, $sql)) {
     echo "Tabla CuentasAhorros creada\n";
 } else {
-    echo "Error" . mysqli_error($con)."\n";
+    //echo "Error" . mysqli_error($con)."\n";
 }
 ?>
 <!doctype html>
