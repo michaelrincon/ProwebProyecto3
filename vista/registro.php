@@ -22,7 +22,17 @@
         <input type="radio" id="cliente" name="tipo" value="Cliente">
         <label for="Ascen">Cliente</label><br>
         <input type="radio" id="admin" name="tipo" value="Administrador">
-        <label for="Desc">Administrador</label>
+        <label for="Desc">Administrador</label><br>
+        <br>
+        <br>
+        <br>
+        <label >Banco deseado</label>
+        <select name="banco" class="form-control" id="banco" required>
+              <option selected>Bancolombia</option>
+              <option >Banco Falabella</option>
+              <option >Banco Colpatria</option>
+              <option >Banco Bogotá</option>
+            </select>
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarme</button>
       </form>

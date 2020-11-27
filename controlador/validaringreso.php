@@ -26,7 +26,7 @@
     }elseif(isset($_POST['invitado'])){
             $cedula= $_POST['cedula'];
             $email = $_POST['invitado_email'];
-            $sql= "SELECT * from Invitados where Email = '$email'";
+            $sql= "SELECT * from Visitantes where Email = '$email'";
             $query = mysqli_query($con,$sql);
             $row = mysqli_fetch_array($query);
             if(mysqli_num_rows($query)!=0)
@@ -42,7 +42,7 @@
                }
             }
             else{
-                    $sql3 = "INSERT INTO Invitados (Email,Cedula)
+                    $sql3 = "INSERT INTO Visitantes (Email,Cedula)
                     VALUES ('$email','$cedula')";
                     $registrar_usuario = mysqli_query($con,$sql3);
                     if(!$registrar_usuario){

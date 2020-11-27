@@ -16,21 +16,39 @@ echo "Base de datos".NOMBRE_DB." creada\n";
 }
 $con= mysqli_connect(HOST_DB,USUARIO_DB,USUARIO_PASS,NOMBRE_DB);
 //creación tablas
-$sql = "CREATE TABLE Clientes (Id INT(11) NOT NULL AUTO_INCREMENT,Usuario VARCHAR(30),Contrasena VARCHAR(200),Rol VARCHAR(30),UNIQUE(Usuario), PRIMARY KEY (Id))";
+$sql = "CREATE TABLE Clientes (Id INT(11) NOT NULL AUTO_INCREMENT,Usuario VARCHAR(30),Contrasena VARCHAR(200),Rol VARCHAR(30),Banco VARCHAR(30),UNIQUE(Usuario), PRIMARY KEY (Id))";
 if (mysqli_query($con, $sql)) {
     echo "Tabla Clientes creada\n";
 } else {
     //echo "Error" . mysqli_error($con)."\n";
 }
-$sql = "CREATE TABLE Invitados ( Email VARCHAR(30) NOT NULL,Cedula INT(10) NOT NULL, PRIMARY KEY (Email));";
+$sql = "CREATE TABLE Visitantes ( Email VARCHAR(30) NOT NULL,Cedula INT(10) NOT NULL, PRIMARY KEY (Email));";
 if (mysqli_query($con, $sql)) {
-    echo "Tabla Invitados creada\n";
+    echo "Tabla Visitantes creada\n";
 } else {
     //echo "Error" . mysqli_error($con)."\n";
 }
 $sql = "CREATE TABLE CuentasAhorros (Id INT(11) NOT NULL AUTO_INCREMENT,Saldo decimal(40,10) NOT NULL, ClienteId INT(11),PRIMARY KEY (Id),FOREIGN KEY (ClienteId) REFERENCES Clientes(Id) ON DELETE CASCADE);";
 if (mysqli_query($con, $sql)) {
     echo "Tabla CuentasAhorros creada\n";
+} else {
+    //echo "Error" . mysqli_error($con)."\n";
+}
+$sql = "CREATE TABLE Creditos (Id INT(11) NOT NULL AUTO_INCREMENT,Saldo decimal(40,10) NOT NULL,Interes decimal(40,10) NOT NULL,Estado VARCHAR(30) NOT NULL,FechaPago VARCHAR(30) NOT NULL, ClienteId INT(11),EmailVisi VARCHAR(30),PRIMARY KEY (Id));";
+if (mysqli_query($con, $sql)) {
+    echo "Tabla Creditos creada\n";
+} else {
+    //echo "Error" . mysqli_error($con)."\n";
+}
+$sql = "CREATE TABLE TarjetaCredito (Id INT(11) NOT NULL AUTO_INCREMENT,CupoMaximo decimal(40,10) NOT NULL,SobreCupo decimal(40,10) NOT NULL,CuotaManejo decimal(40,10) NOT NULL,TasaInteres decimal(40,10) NOT NULL,Estado VARCHAR(30) NOT NULL, ClienteId INT(11),PRIMARY KEY (Id),FOREIGN KEY (ClienteId) REFERENCES Clientes(Id) ON DELETE CASCADE);";
+if (mysqli_query($con, $sql)) {
+    echo "Tabla TarjetaCredito creada\n";
+} else {
+    //echo "Error" . mysqli_error($con)."\n";
+}
+$sql = "CREATE TABLE OperacionTransfe (Id INT(11) NOT NULL AUTO_INCREMENT,CupoMaximo decimal(40,10) NOT NULL,SobreCupo decimal(40,10) NOT NULL,CuotaManejo decimal(40,10) NOT NULL,TasaInteres decimal(40,10) NOT NULL,Estado VARCHAR(30) NOT NULL, ClienteId INT(11),PRIMARY KEY (Id),FOREIGN KEY (ClienteId) REFERENCES Clientes(Id) ON DELETE CASCADE);";
+if (mysqli_query($con, $sql)) {
+    echo "Tabla TarjetaCredito creada\n";
 } else {
     //echo "Error" . mysqli_error($con)."\n";
 }
@@ -66,12 +84,12 @@ if (mysqli_query($con, $sql)) {
             </div>
             <div class="container form-signin">
                 <form class="form" method="post" action="./controlador/validaringreso.php">
-                    <h1>Acceder Como Invitado</h1>
+                    <h1>Acceder Como Visitante</h1>
                     <div class="form-group">
                         <input type="number" id="inputPassword" name="cedula" class="form-control" placeholder="Cédula" required>
                         <input type="email" id="inputEmail" name="invitado_email" class="form-control" placeholder="Email" required>
                         <br>
-                        <button class="btn btn-success" name="invitado" type="submit">Acceder como Invitado</button>
+                        <button class="btn btn-success" name="invitado" type="submit">Acceder como Visitante</button>
                     </div>
                 </form>
             </div>
