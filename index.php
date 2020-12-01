@@ -34,13 +34,13 @@ if (mysqli_query($con, $sql)) {
 } else {
     //echo "Error" . mysqli_error($con)."\n";
 }
-$sql = "CREATE TABLE Creditos (Id INT(11) NOT NULL AUTO_INCREMENT,Saldo decimal(40,10) NOT NULL,Interes decimal(40,10) NOT NULL,Estado VARCHAR(30) NOT NULL,FechaPago VARCHAR(30) NOT NULL, ClienteId INT(11),EmailVisi VARCHAR(30),PRIMARY KEY (Id));";
+$sql = "CREATE TABLE Creditos (Id INT(11) NOT NULL AUTO_INCREMENT,Saldo decimal(40,10) NOT NULL,Interes decimal(40,10) NOT NULL,Estado VARCHAR(30) NOT NULL,FechaPago VARCHAR(30) NOT NULL, ClienteId INT(11),EmailVisi VARCHAR(30),Cedulavisi INT(10),PRIMARY KEY (Id));";
 if (mysqli_query($con, $sql)) {
     echo "Tabla Creditos creada\n";
 } else {
     //echo "Error" . mysqli_error($con)."\n";
 }
-$sql = "CREATE TABLE TarjetaCredito (Id INT(11) NOT NULL AUTO_INCREMENT,CupoMaximo decimal(40,10) NOT NULL,SobreCupo decimal(40,10) NOT NULL,CuotaManejo decimal(40,10) NOT NULL,TasaInteres decimal(40,10) NOT NULL,Estado VARCHAR(30) NOT NULL, ClienteId INT(11),PRIMARY KEY (Id),FOREIGN KEY (ClienteId) REFERENCES Clientes(Id) ON DELETE CASCADE);";
+$sql = "CREATE TABLE TarjetaCredito (Id INT(11) NOT NULL AUTO_INCREMENT,CupoMaximo decimal(40,10) NOT NULL,SobreCupo decimal(40,10) NOT NULL,CupoUsado decimal(40,10) NOT NULL,CuotaManejo decimal(40,10) NOT NULL,TasaInteres decimal(40,10) NOT NULL,Estado VARCHAR(30) NOT NULL, ClienteId INT(11),PRIMARY KEY (Id),FOREIGN KEY (ClienteId) REFERENCES Clientes(Id) ON DELETE CASCADE);";
 if (mysqli_query($con, $sql)) {
     echo "Tabla TarjetaCredito creada\n";
 } else {
