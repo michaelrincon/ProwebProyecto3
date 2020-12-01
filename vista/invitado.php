@@ -20,7 +20,7 @@
       <nav class="my-2 my-md-0 mr-md-3">
           <a class="p-2 text-dark" href="./invitado.php"><?php echo $Email; ?></a>
           <a class="p-2 text-dark" href="./registro.php">Cuenta de ahorros</a>
-          <a class="p-2 text-dark" href="./creditoVisitante.php">Créditos</a>
+          <a class="p-2 text-dark" href="./creditosvisitantes.php">Créditos</a>
           <a class="p-2 text-dark" href="./registro.php">Tarjetas de crédito</a>
           <?php if($_SESSION['Rol']=='Administrador') echo '<a class="p-2 text-dark" href="./administrador.php">Administrador</a>';?>
       </nav>

@@ -1,8 +1,8 @@
-  <?php
-  include_once '../controlador/cuentaahorros.php';
-  $Usuario = ($_SESSION['Usuario']);
-  $_SESSION['CuentasAhorros'];
-  $_SESSION['TodasCuentasAhorros'];
+<?php
+  include_once '../controlador/creditosvisitantes.php';
+  $Usuario = ($_SESSION['Email']);
+  $_SESSION['creditos'];
+  $_SESSION['TodasCreditos'];
 
   $respuesta='';
   if(isset($_SESSION['respuesta'])) {
@@ -20,23 +20,24 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-    <title>Cuenta de ahorros</title>
+    <title>Creditos</title>
 
-    <style>
-        .botones{
-            display: flex;
-            justify-content:center;
-        }
-        .cuentas, .consignar{
-            display: flex;
-            justify-content:center;
-        }
-        
-    </style>
+<style>
+    .botones{
+        display: flex;
+        justify-content:center;
+    }
+    .cuentas, .consignar{
+        display: flex;
+        justify-content:center;
+    }
+    
+</style>
   </head>
   <body>
-  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
       <nav class="my-2 my-md-0 mr-md-3">
           <a class="p-2 text-dark" href="./perfil.php"><?php echo $Usuario; ?></a>
           <a class="p-2 text-dark" href="./cuentaahorros.php">Cuenta de ahorros</a>
@@ -53,18 +54,15 @@
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Saldo</th>
-            <th scope="col">Retirar</th>
-
           </tr>
         </thead>
         <tbody>
           <?php
-            if(sizeof( $_SESSION['CuentasAhorros'])>0){
-                foreach ( $_SESSION['CuentasAhorros'] as $key) {
+            if(sizeof( $_SESSION['creditos'])>0){
+                foreach ( $_SESSION['creditos'] as $key) {
                     echo '<tr>';
                       echo '<th >'.$key['Id']."</th>";
                       echo "<td> $ ".number_format($key['Saldo'],2)." JaveCoins </td> ";
-                      echo " <td> <a class=option-btn btn btn-warning href=./retirar.php?IdCuenta=".$key['Id']." >Retirar </a></td>";
                       echo '</tr>';
                   }
             }
@@ -75,31 +73,19 @@
     </div>
         <div class="botones">
 
-            <a class="option-btn btn btn-success" href="./crearCuentaAhorros.php">Crear cuenta de ahorros</a>
-
+            <a class="option-btn btn btn-success" href="./crearcreditovisitantes.php">Crear credito</a>
 
       </div>
-    </div>
-
-    <div class="consignar">
+      <div class="consignar">
         <div>
-          <h2>Consignar de una cuenta de ahorros a otra</h2>
-          <form class="container form-signin" action="../controlador/consignar.php" method="post">
-            <label >Cuenta de Ahorros Origen</label>
-            <select name="origen" class="form-control" id="origin" required>
-              <?php
-                foreach ( $_SESSION['CuentasAhorros'] as $key ) {
-                  echo '<option>'.$key['Id'].'</option>';
-                }
-              ?>
-              <option>Sin cuenta</option>
-            </select>
+          <h2>Consignar a un credito</h2>
+          <form class="container form-signin" action="../controlador/consignarcreditovisitante.php" method="post">
             <label for="amount">Monto a Consignar</label>
             <input type="number" name="monto" id="amount" placeholder="Monto" class="form-control" required>
-            <label >Cuenta de Destino</label>
+            <label >Credito a pagar</label>
             <select name="destino" class="form-control" id="origin" required>
               <?php
-                foreach ($_SESSION['TodasCuentasAhorros'] as $key ) {
+                foreach ($_SESSION['creditos'] as $key ) {
                   echo '<option>'. $key['Id'] .'</option>';
                 }
               ?>
@@ -109,6 +95,7 @@
             </div>
           </form>
         </div>
+    </div>
 
   </body>
 </html>
