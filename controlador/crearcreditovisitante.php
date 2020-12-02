@@ -7,7 +7,7 @@
   $email =$_POST['email'];
   $fecha =$_POST['fecha'];
   $identificador = $_SESSION['Cedula'];
-  $sql = "INSERT INTO creditos (Saldo,Interes,Estado,FechaPago,EmailVisi,Cedulavisi) VALUES ('$saldo',3,'aprobado','$fecha','$email','$identificador') ;";
+  $sql = "INSERT INTO creditos (Saldo,Interes,Estado,FechaPago,EmailVisi,Cedulavisi) VALUES ('$saldo',3,'pendiente','$fecha','$email','$identificador') ;";
   $x = mysqli_query($con,$sql);
   if(!$x){
       die('No es posible registrar el usuario'.mysqli_error($con));

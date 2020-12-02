@@ -1,8 +1,7 @@
 <?php
-  include_once '../controlador/creditos.php';
+  include_once '../controlador/creditosadmin.php';
   $Usuario = ($_SESSION['Usuario']);
-  $_SESSION['creditos'];
-  $_SESSION['TodasCreditos'];
+  $_SESSION['creditosAdmin'];
 
   $respuesta='';
   if(isset($_SESSION['respuesta'])) {
@@ -38,12 +37,15 @@
   </head>
   <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-      <nav class="my-2 my-md-0 mr-md-3">
+    <nav class="my-2 my-md-0 mr-md-3">
           <a class="p-2 text-dark" href="./perfil.php"><?php echo $Usuario; ?></a>
-          <a class="p-2 text-dark" href="./cuentaahorros.php">Cuenta de ahorros</a>
-          <a class="p-2 text-dark" href="./creditos.php">Créditos</a>
-          <a class="p-2 text-dark" href="./tarjetacredito.php">Tarjetas de crédito</a>
-          <a class="p-2 text-dark" href="./mensajes.php">Mensajes</a>
+          <?php if($_SESSION['Rol']=='Administrador') echo '<a class="p-2 text-dark" href="./cuentaahorrosadmin.php">Cuenta de ahorros</a>';?>
+          <?php if($_SESSION['Rol']=='Cliente') echo '<a class="p-2 text-dark" href="./cuentaahorros.php">Cuenta de ahorros</a>';?>
+          <?php if($_SESSION['Rol']=='Administrador') echo '<a class="p-2 text-dark" href="./creditosadmin.php">Créditos</a>';?>
+          <?php if($_SESSION['Rol']=='Cliente') echo '<a class="p-2 text-dark" href="./creditos.php">Créditos</a>';?>
+          <?php if($_SESSION['Rol']=='Administrador') echo '<a class="p-2 text-dark" href="./tarjetacreditoadmin.php">Tarjetas de crédito</a>';?>
+          <?php if($_SESSION['Rol']=='Cliente') echo '<a class="p-2 text-dark" href="./tarjetacredito.php">Tarjetas de crédito</a>';?>
+          <?php if($_SESSION['Rol']=='Administrador') echo '<a class="p-2 text-dark" href="./mensajes.php">Mensajes</a>';?>
           <?php if($_SESSION['Rol']=='Administrador') echo '<a class="p-2 text-dark" href="./administrador.php">Administrador</a>';?>
       </nav>
       <a class="btn btn-outline-danger" href="../controlador/salir.php">Salir</a>
@@ -54,15 +56,23 @@
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Saldo</th>
+            <th scope="col">Cliente Id</th>
+            <th scope="col">Email Visitante</th>
+            <th scope="col">Acción</th>
+            <th scope="col">Acción</th>
           </tr>
         </thead>
         <tbody>
           <?php
-            if(sizeof( $_SESSION['creditos'])>0){
-                foreach ( $_SESSION['creditos'] as $key) {
+            if(sizeof( $_SESSION['creditosAdmin'])>0){
+                foreach ( $_SESSION['creditosAdmin'] as $key) {
                     echo '<tr>';
                       echo '<th >'.$key['Id']."</th>";
                       echo "<td> $ ".number_format($key['Saldo'],2)." JaveCoins </td> ";
+                      echo "<td>".$key['ClienteId']."</td> ";
+                      echo "<td>".$key['EmailVisi']."</td> ";
+                      echo " <td> <a class=option-btn btn btn-warning href=../controlador/aprobarcredito.php?IdCredito=".$key['Id']." >Aprobar </a></td>";
+                      echo " <td> <a class=option-btn btn btn-warning href=../controlador/rechazarcredito.php?IdCredito=".$key['Id']." >Rechazar </a></td>";
                       echo '</tr>';
                   }
             }
@@ -70,31 +80,6 @@
           ?>
         </tbody>
       </table>
-    </div>
-        <div class="botones">
-
-            <a class="option-btn btn btn-success" href="./crearcredito.php">Crear credito</a>
-
-      </div>
-      <div class="consignar">
-        <div>
-          <h2>Consignar a un credito</h2>
-          <form class="container form-signin" action="../controlador/consignarcredito.php" method="post">
-            <label for="amount">Monto a Consignar</label>
-            <input type="number" name="monto" id="amount" placeholder="Monto" class="form-control" required>
-            <label >Credito a pagar</label>
-            <select name="destino" class="form-control" id="origin" required>
-              <?php
-                foreach ($_SESSION['creditos'] as $key ) {
-                  echo '<option>'. $key['Id'] .'</option>';
-                }
-              ?>
-            </select><br>
-            <div class="botones">
-              <button type="submit" class="submit-btn btn btn-info">Consignar</button>
-            </div>
-          </form>
-        </div>
     </div>
 
   </body>

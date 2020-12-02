@@ -20,8 +20,8 @@
 
         }
         else {
-            header("Location: ../index.php");
-            //echo "Ingrese los datos nuevamenteeee";
+            //header("Location: ../index.php");
+            echo "Ingrese los datos nuevamenteeee";
         }
     }elseif(isset($_POST['invitado'])){
             $cedula= $_POST['cedula'];
@@ -38,7 +38,8 @@
                     header('Location: ../vista/invitado.php');
                     
                }else{
-                    header("Location: ../index.php");
+                   echo "aquiii";
+                   // header("Location: ../index.php");
                }
             }
             else{

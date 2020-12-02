@@ -6,7 +6,9 @@
     $arreglo = mysqli_query($con,$sql);
     $new_array = array();
     while( $row = mysqli_fetch_array( $arreglo)){
-        $new_array[]=$row; // Inside while loop
+        if($row['Estado']==='aprobado'){
+            $new_array[]=$row; // Inside while loop
+        }   
     }
     $_SESSION['creditos'] = $new_array;
 

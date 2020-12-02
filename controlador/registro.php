@@ -24,7 +24,7 @@
                 }
             }
             if($tipo === 'Administrador'){
-                $sql3 = "INSERT INTO Clientes (Usuario,Contrasena,Rol)
+                $sql3 = "INSERT INTO Clientes (Usuario,Contrasena,Rol,Banco)
                 VALUES ('$usuario','$contrasena','Administrador','$banco')";
                 $registrar_usuario = mysqli_query($con,$sql3);
                 if(!$registrar_usuario){
